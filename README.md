@@ -154,3 +154,5 @@ http://localhost/galeri-kreatif/admin/dashboard.php
 ---
 
 Dibuat untuk memenuhi tugas UTS Praktikum Pemrograman Web — implementasi CRUD Native PHP.
+
+LINK DRIVE : https://drive.google.com/file/d/1AHwV7oYnc_CBUmwo-odKketOAAn-L9PU/view?usp=sharing
