@@ -1,3 +1,4 @@
+
 # Galeri Aset Kreatif & Desain Karakter
 
 Aplikasi web CRUD (Create, Read, Update, Delete) menggunakan **Native PHP** + **MySQL**, dengan antarmuka responsif (Bootstrap/Tailwind CSS). Studi kasus: galeri digital untuk komunitas kreatif (desainer grafis & pixel artist) — memamerkan karya, memberi like, dan berdiskusi lewat komentar.
