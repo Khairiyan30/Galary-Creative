@@ -1,0 +1,834 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap');
+
+:root {
+    /* Color Palette (updated) */
+    --deep-violet: #D72323;   /* Now Red */
+    --vivid-purple: #3E3636;  /* Now Dark Gray */
+    --brand-red: #D72323;     /* Ensure this exists since I used it */
+    --orchid-pink: #000000;
+    --ice-white: #F5EDED;
+
+    /* Neutrals and states from DESIGN.md */
+    --pure-black: #000000;
+    --true-white: #FFFFFF;
+    --warm-gray: #62625B;
+    --light-gray: #E5E5E0;
+    --off-white: #F6F6F3;
+    --soft-gray: #EFEFEF;
+    --near-black: #181816;
+    
+    /* Interactive States */
+    --error-red: #DD0E0E;
+    --success-green: #02B70E;
+    
+    /* Base layouts */
+    --font-primary: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --transition-smooth: all 0.2s ease-in-out;
+}
+
+/* Global Reset & Base */
+html, body {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: var(--font-primary);
+    background-color: var(--ice-white);
+    color: var(--pure-black);
+    font-size: 14px;
+    font-weight: 700;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+p, span, label, input, select, textarea, button, td, th {
+    font-weight: 700; /* Ensure body and forms inherit 700 weight where expected, buttons/inputs will override to 400 */
+}
+
+/* Typography Hierarchy according to DESIGN.md */
+h1, .h1-display {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 26.4px;
+    letter-spacing: 0px;
+    color: var(--deep-violet);
+}
+h2, .h2-title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22.4px;
+    letter-spacing: 0px;
+    color: var(--deep-violet);
+}
+.body-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--pure-black);
+}
+.caption-text, .helper-text {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    color: var(--warm-gray);
+}
+code, pre {
+    font-family: monospace;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--ice-white);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--vivid-purple);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--deep-violet);
+}
+
+/* Pinterest Navigation Header Style */
+.navbar-custom {
+    background-color: var(--true-white);
+    min-height: 72px;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-left: 16px;
+    padding-right: 16px;
+    border: none;
+    border-bottom: 1px solid var(--light-gray);
+    box-shadow: none;
+    margin: 0;
+}
+.navbar-custom .container-fluid {
+    min-height: 72px;
+    padding-top: 0;
+    padding-bottom: 0;
+    align-items: center;
+}
+.navbar-custom .navbar-brand {
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--deep-violet);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-right: 16px;
+}
+.navbar-custom .navbar-brand i {
+    color: var(--vivid-purple);
+}
+.navbar-custom .navbar-collapse {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+/* Mobile: remove gap when collapsed menu opens */
+.navbar-custom .navbar-collapse.collapsing,
+.navbar-custom .navbar-collapse.show {
+    border-top: 1px solid var(--light-gray);
+    padding: 12px 0;
+    margin-top: 0;
+    background-color: var(--true-white);
+}
+.navbar-custom .nav-link {
+    color: var(--deep-violet) !important;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 6px 14px !important;
+    border-radius: 999px;
+    line-height: 1.4;
+    transition: var(--transition-smooth);
+}
+.navbar-custom .nav-link:hover {
+    background-color: var(--off-white);
+    color: var(--pure-black) !important;
+}
+.navbar-custom .nav-link.active {
+    color: var(--vivid-purple) !important;
+    background-color: var(--ice-white);
+}
+/* Navbar toggler — no extra spacing */
+.navbar-custom .navbar-toggler {
+    padding: 4px 8px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+.navbar-custom .navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* Interactive Search in Navbar - Pinterest Style */
+.navbar-search-container {
+    flex-grow: 1;
+    max-width: 600px;
+    margin: 0 16px;
+}
+.search-pill-form {
+    background-color: var(--soft-gray);
+    border-radius: 999px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    height: 48px;
+    transition: var(--transition-smooth);
+    border: 2px solid transparent;
+}
+.search-pill-form:focus-within {
+    background-color: var(--true-white);
+    border-color: var(--deep-violet);
+    box-shadow: 0px 0px 0px 2px rgba(62, 54, 54, 0.1);
+}
+.search-pill-input {
+    border: none;
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 400; /* Input placeholder & text is 400 */
+    outline: none;
+    color: var(--pure-black);
+}
+.search-pill-input::placeholder {
+    color: var(--warm-gray);
+}
+.search-pill-btn {
+    border: none;
+    background: transparent;
+    color: var(--warm-gray);
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Custom Buttons - Inspired by DESIGN.md */
+.btn-primary-custom {
+    background-color: var(--deep-violet);
+    color: var(--true-white);
+    font-size: 12px;
+    font-weight: 400;
+    padding: 6px 14px;
+    border-radius: 16px;
+    border: 2px solid transparent;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    cursor: pointer;
+}
+.btn-primary-custom:hover {
+    background-color: var(--vivid-purple);
+    color: var(--true-white);
+}
+.btn-primary-custom:active {
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+.btn-primary-custom:focus {
+    box-shadow: 0px 0px 0px 3px rgba(62, 54, 54, 0.2);
+    outline: none;
+}
+
+.btn-secondary-custom {
+    background-color: var(--light-gray);
+    color: var(--pure-black);
+    font-size: 12px;
+    font-weight: 400;
+    padding: 6px 14px;
+    border-radius: 16px;
+    border: 2px solid transparent;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    cursor: pointer;
+}
+.btn-secondary-custom:hover {
+    background-color: #D4D4CF;
+}
+.btn-secondary-custom:active {
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.15);
+}
+.btn-secondary-custom:focus {
+    box-shadow: 0px 0px 0px 3px rgba(229, 229, 224, 0.3);
+    outline: none;
+}
+
+.btn-accent-custom {
+    background-color: var(--true-white);
+    color: var(--pure-black);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 16px;
+    border: 2px solid transparent;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    cursor: pointer;
+}
+.btn-accent-custom:hover {
+    background-color: var(--vivid-purple);
+    color: var(--true-white);
+}
+.btn-accent-custom:focus {
+    box-shadow: 0px 0px 0px 3px rgba(215, 35, 35, 0.2);
+    outline: none;
+}
+
+.btn-outline-custom {
+    background-color: transparent;
+    border: 2px solid var(--vivid-purple);
+    color: var(--vivid-purple);
+    font-size: 12px;
+    font-weight: 400;
+    padding: 6px 14px;
+    border-radius: 16px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+.btn-outline-custom:hover {
+    background-color: var(--vivid-purple);
+    color: var(--true-white);
+}
+.btn-outline-custom:focus {
+    box-shadow: 0px 0px 0px 3px rgba(215, 35, 35, 0.2);
+    outline: none;
+}
+
+/* Glass Panels & Containers */
+.glass-panel {
+    background: var(--true-white);
+    border: 1px solid var(--light-gray);
+    border-radius: 16px; /* H1/Card border radius is 12px/16px */
+    padding: 16px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.08); /* Level Raised (1) */
+}
+
+/* Text Inputs & Form elements */
+.form-control-custom {
+    background-color: var(--true-white);
+    color: var(--pure-black);
+    font-size: 16px;
+    font-weight: 400; /* Input is 400 */
+    padding: 11px 15px;
+    border-radius: 16px;
+    border: 1px solid var(--warm-gray);
+    height: 48px;
+    width: 100%;
+    outline: none;
+    transition: var(--transition-smooth);
+}
+.form-control-custom:focus {
+    border-color: var(--deep-violet);
+    box-shadow: 0px 0px 0px 2px rgba(62, 54, 54, 0.1);
+}
+.form-control-custom::placeholder {
+    color: var(--warm-gray);
+}
+.form-control-custom.error {
+    border-color: var(--error-red);
+    background-color: rgba(221, 14, 14, 0.05);
+}
+.form-label-custom {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--deep-violet);
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+textarea.form-control-custom {
+    height: auto;
+}
+
+/* Form Select Compact */
+.form-select.form-control-custom {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233E3636' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+/* CSS Grid Layout — fills left-to-right, then wraps down */
+.pin-columns {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 16px;
+    width: 100%;
+    align-items: start;
+}
+@media (min-width: 600px) {
+    .pin-columns {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@media (min-width: 1024px) {
+    .pin-columns {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+@media (min-width: 1440px) {
+    .pin-columns {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+}
+
+.pin-item {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Compact Card / Pin Item */
+.card-asset {
+    background-color: var(--true-white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: var(--transition-smooth);
+    border: none;
+    position: relative;
+}
+.card-asset:hover {
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15); /* Prominent shadow */
+    transform: translateY(-2px) scale(1.01);
+}
+.card-asset-img-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+.card-asset-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+.card-asset-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+.card-asset:hover .card-asset-overlay {
+    opacity: 1;
+}
+.card-asset-body {
+    padding: 12px;
+}
+.card-asset-title {
+    font-size: 14px; /* Title inside grid is H2 equivalent or 14px body */
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--deep-violet);
+    line-height: 1.4;
+    word-break: break-word;
+}
+.card-asset-title a {
+    text-decoration: none;
+    color: var(--deep-violet);
+}
+.card-asset-title a:hover {
+    color: var(--vivid-purple);
+}
+
+/* Card Stats (Like & Comment) */
+.stat-item {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--warm-gray);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition-smooth);
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.stat-item:hover {
+    color: var(--deep-violet);
+    background-color: var(--ice-white);
+}
+.stat-item.active {
+    color: var(--vivid-purple);
+}
+.stat-item i.text-danger {
+    color: #D72323 !important; /* Brand red */
+}
+
+/* Category Pill Badges */
+.badge-category {
+    background-color: var(--ice-white);
+    color: var(--vivid-purple);
+    font-size: 12px;
+    font-weight: 400; /* Label weight is 400 */
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--light-gray);
+    display: inline-block;
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+.badge-category:hover {
+    background-color: var(--off-white);
+    border-color: var(--warm-gray);
+}
+
+/* Category filter navigation (Pinterest Pill Link) */
+.category-filter-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+.category-filter-btn {
+    background-color: transparent;
+    color: var(--deep-violet);
+    font-size: 12px;
+    font-weight: 400;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--light-gray);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+}
+.category-filter-btn:hover {
+    background-color: var(--off-white);
+    border-color: var(--warm-gray);
+    color: var(--pure-black);
+}
+.category-filter-btn.active {
+    background-color: var(--deep-violet);
+    color: var(--true-white);
+    border-color: var(--deep-violet);
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: var(--true-white);
+    padding: 64px 16px;
+    border-radius: 16px;
+    margin-bottom: 32px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.08);
+}
+.hero-title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 26.4px;
+    color: var(--deep-violet);
+    margin-bottom: 16px;
+}
+.hero-title span {
+    color: var(--vivid-purple);
+}
+.hero-subtitle {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--warm-gray);
+    margin-bottom: 24px;
+}
+
+/* Detail Page Custom */
+.detail-img-container {
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: var(--true-white);
+    padding: 16px;
+    border: 1px solid var(--light-gray);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.08);
+}
+.detail-img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    max-height: 700px;
+    object-fit: contain;
+}
+
+/* Comments Section - Inspired by Pinterest comment boxes */
+.comment-card {
+    background-color: var(--true-white);
+    border-radius: 12px;
+    border: 1px solid var(--light-gray);
+    padding: 12px;
+    margin-bottom: 12px;
+    transition: var(--transition-smooth);
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.05);
+}
+.comment-card:hover {
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+}
+.comment-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.comment-author {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--deep-violet);
+}
+.comment-meta {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--warm-gray);
+}
+.comment-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--pure-black);
+    margin-top: 4px;
+}
+
+/* Stats items */
+.stat-item {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--warm-gray);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+.stat-item.active {
+    color: var(--orchid-pink);
+    font-weight: 700;
+}
+
+/* Profile specific */
+.avatar-profile-big {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--orchid-pink);
+}
+
+/* Footer layout */
+.footer-custom {
+    background-color: var(--true-white);
+    border-top: 1px solid var(--light-gray);
+    padding: 24px 16px;
+    margin-top: auto;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--warm-gray);
+}
+.footer-custom a {
+    color: var(--vivid-purple);
+    font-weight: 700;
+    text-decoration: none;
+}
+.footer-custom a:hover {
+    text-decoration: underline;
+}
+
+/* Stat Cards for Admin */
+.stat-card {
+    background: var(--true-white);
+    border: 1px solid var(--light-gray);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+.stat-card-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--warm-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.stat-card-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--deep-violet);
+    margin-top: 8px;
+}
+.stat-card-icon {
+    font-size: 32px;
+    color: var(--brand-red);
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    opacity: 0.2;
+}
+
+/* Auth Cards Glassmorphism overlay */
+.auth-container {
+    min-height: calc(100vh - 160px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 16px;
+}
+.auth-card {
+    background: var(--true-white);
+    border: 1px solid var(--light-gray);
+    border-radius: 16px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    overflow: hidden;
+}
+.auth-header {
+    background-color: var(--deep-violet);
+    color: var(--true-white);
+    padding: 24px;
+    text-align: center;
+}
+.auth-header a {
+    color: var(--true-white);
+    font-weight: 700;
+}
+.auth-body {
+    padding: 24px;
+}
+
+/* ================================================
+ * Footer — Pinterest-style light footer
+ * ================================================ */
+.footer-custom {
+    background-color: var(--true-white);
+    border-top: 1px solid var(--light-gray);
+    padding: 24px 0;
+    margin-top: auto;
+}
+
+/* ================================================
+ * Sticky navbar gap fix
+ * ================================================ */
+.sticky-top {
+    top: 0 !important;
+    z-index: 1030;
+}
+
+/* ================================================
+ * Hero Section (index.php landing banner)
+ * ================================================ */
+.hero-section {
+    background: linear-gradient(135deg,
+        rgba(62, 54, 54, 0.04) 0%,
+        rgba(215, 35, 35, 0.06) 50%,
+        rgba(245, 237, 237, 0.8) 100%);
+    padding: 72px 0 56px;
+    margin-bottom: 0;
+}
+.hero-title {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--deep-violet);
+    margin-bottom: 16px;
+}
+.hero-title span {
+    color: var(--vivid-purple);
+}
+.hero-subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--warm-gray);
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+/* ================================================
+ * Comments — Detail page discussion section
+ * ================================================ */
+.comment-card {
+    background-color: var(--true-white);
+    border: 1px solid var(--light-gray);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 12px;
+    /* Critical: prevent long text from overflowing */
+    overflow: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+.comment-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--pure-black);
+    line-height: 1.6;
+    margin-top: 12px;
+    /* Fix for long unbroken strings like "ooooooo..." */
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+    max-width: 100%;
+}
+.comment-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.comment-author {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--deep-violet);
+}
+
+/* ================================================
+ * Override Bootstrap Nav-Pills
+ * ================================================ */
+.nav-pills .nav-link {
+    color: var(--deep-violet);
+}
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: var(--true-white);
+    background-color: var(--deep-violet);
+}
+.comment-meta {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--warm-gray);
+}
+
+/* Global overflow safety — prevent ANY container from being blown out */
+.glass-panel,
+.card-asset,
+.card-asset-body {
+    overflow: hidden;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+/* Fix table-responsive horizontal scrolling on mobile */
+.table-responsive table {
+    min-width: 800px;
+}
